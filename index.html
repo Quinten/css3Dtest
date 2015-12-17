@@ -1,0 +1,140 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+
+<title>css3Dtest</title>
+
+<style type="text/css">
+
+/* structure */
+
+body {
+	margin: 0;
+}
+
+#wrapper {
+	width: 640px;
+	margin: 0 auto;
+}
+
+.viewport {
+	position: relative;
+	width: 640px;
+	height: 480px;
+	margin: 60px 0 60px 0;
+}
+
+.viewport img {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 640px;
+	height: 480px;
+	border: 0;
+	margin: 0;
+}
+
+.thumbs img {
+	width: 80px;
+	height: 60px;
+	float: left;
+	border: 0;
+	cursor: pointer;
+	margin: 0 0 0 60px;
+}
+
+.thumbs img:first-child {
+	margin: 0;
+}
+
+/* animation */
+
+.viewport img {
+	opacity: 0;
+	-webkit-transition: -webkit-transform 0.5s ease-out;
+	-moz-transition: -moz-transform 0.5s ease-out;
+	-ms-transition: -ms-transform 0.5s ease-out;
+	-o-transition: -o-transform 0.5s ease-out;
+	transition: transform 0.5s ease-out;
+
+	-webkit-transform: perspective( 1000px ) rotateY( -180deg ); 
+	-moz-transform: perspective( 1000px ) rotateY( -180deg ); 
+	-ms-transform: perspective( 1000px ) rotateY( -180deg ); 
+	-o-transform: perspective( 1000px ) rotateY( -180deg ); 
+	transform: perspective( 1000px ) rotateY( -180deg );
+	
+	-webkit-backface-visibility: hidden;
+  	-moz-backface-visibility: hidden;
+  	-ms-backface-visibility: hidden;
+	-o-backface-visibility: hidden;
+	backface-visibility: hidden;
+}
+
+/* animate in */
+.viewport img.active {
+	opacity: 1;
+	-webkit-transform: perspective( 1000px ) rotateY( 0 ); 
+	-moz-transform: perspective( 1000px ) rotateY( 0 ); 
+	-ms-transform: perspective( 1000px ) rotateY( 0 ); 
+	-o-transform: perspective( 1000px ) rotateY( 0 ); 
+	transform: perspective( 1000px ) rotateY( 0 ); 
+}
+
+/* animate out */
+.viewport img.out {
+	opacity: 1;
+	-webkit-transform: perspective( 1000px ) rotateY( 180deg );
+	-moz-transform: perspective( 1000px ) rotateY( 180deg );
+	-ms-transform: perspective( 1000px ) rotateY( 180deg );
+	-o-transform: perspective( 1000px ) rotateY( 180deg );
+	transform: perspective( 1000px ) rotateY( 180deg );
+}
+
+</style>
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+	
+	$(document).ready(function () {
+		
+		$('.thumbs img').click(function(){
+			if (!($('.viewport img:eq(' + $(this).index() + ')').hasClass('active'))) {
+				$('.viewport img.active').removeClass('active').addClass('out');
+				$('.viewport img:eq(' + $(this).index() + ')').addClass('active');
+				setTimeout(function(){$('.viewport img.out').removeClass('out');},500);
+			}
+		});
+		
+		$('.viewport img:eq(0)').addClass('active');
+		
+	});
+	
+</script>
+
+</head>
+<body>
+
+<div id="wrapper">
+
+    <div class="viewport">
+        <img src="img/druk.jpg" />
+        <img src="img/god_or_the_all_seeing_eye.jpg" />
+        <img src="img/tongues.jpg" />
+        <img src="img/bar.jpg" />
+        <img src="img/girl_bottom.jpg" />
+    </div>
+
+    <div class="thumbs">
+        <img src="img/druk.jpg" />
+        <img src="img/god_or_the_all_seeing_eye.jpg" />
+        <img src="img/tongues.jpg" />
+        <img src="img/bar.jpg" />
+        <img src="img/girl_bottom.jpg" />
+    </div>
+
+</div>
+
+</body>
+</html>
